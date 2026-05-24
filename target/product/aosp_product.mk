@@ -18,8 +18,13 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/handheld_product.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/telephony_product.mk)
 
-# Default AOSP sounds
-$(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
+# Pixel sounds
+$(call inherit-product-if-exists, vendor/benzeneos/sounds/PixelAudio.mk)
+
+# Benzene battery HAL
+ifeq (,$(filter sdk_phone% emu64% aosp_cf%,$(TARGET_PRODUCT)))
+$(call inherit-product-if-exists, hardware/benzeneos/battery/battery.mk)
+endif
 
 # Additional settings used in all AOSP builds
 PRODUCT_PRODUCT_PROPERTIES += \
