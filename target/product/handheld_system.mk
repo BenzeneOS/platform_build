@@ -33,6 +33,12 @@ $(call inherit-product-if-exists, external/hyphenation-patterns/patterns.mk)
 $(call inherit-product-if-exists, frameworks/base/data/keyboards/keyboards.mk)
 $(call inherit-product-if-exists, frameworks/webview/chromium/chromium.mk)
 
+PRODUCT_PACKAGE_OVERLAYS += \
+    $(SRC_TARGET_DIR)/product/handheld_system/overlay
+
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
+    $(SRC_TARGET_DIR)/product/handheld_system/overlay/packages/apps/GmsCompat
+
 PRODUCT_PACKAGES += \
     android.software.window_magnification.prebuilt.xml \
     BasicDreams \
@@ -54,6 +60,7 @@ PRODUCT_PACKAGES += \
     ExternalStorageProvider \
     FusedLocation \
     GmsCompat \
+    PushCompat \
     InputDevices \
     KeyChain \
     librs_jni \
