@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="gmscore_known_signers">
+        <item>ad0d055cbccf4b8504371e3b963b3477773153b47a2cebbc79ef794475b0e8a9</item>
+        <item>7ce83c1b71f3d572fed04c8d40c5cb10ff75e6d87d9df6fbd53f0468c2905053</item>
+        <item>5f2391277b1dbd489000467e4c2fa6af802430080457dce2f618992e9dfb5402</item>
+    </array>
+</resources>
