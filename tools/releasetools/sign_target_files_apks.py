@@ -235,7 +235,7 @@ OPTIONS.allow_gsi_debug_sepolicy = False
 OPTIONS.override_apk_keys = None
 OPTIONS.override_apex_keys = None
 OPTIONS.input_tmp = None
-OPTIONS.threads = 1
+OPTIONS.threads = os.cpu_count()
 OPTIONS.apk_logging_on_success = False
 
 
@@ -1802,17 +1802,11 @@ def CollectDirToZip(directory, zfp: str):
       elif filename.endswith(".apex") and IsCompressedApex(src):
         precompressed.append(rel_path)
 
-  # Need to use absolute path, as we change current working directory when
-  # running external zip binary
   zfp = os.path.abspath(zfp)
-  with tempfile.NamedTemporaryFile(prefix="precompressed_list_") as tmpfile:
-    for line in precompressed:
-      tmpfile.write(line.encode() + b"\n")
-    tmpfile.flush()
-    # First add all other files to zip with compression
-    common.RunAndCheckOutput(["zip", zfp, "-y", "-r", ".", "-x@" + tmpfile.name], cwd=directory)
-    # Then add pre-compressed files without compression to save CPU cycle
-    common.RunAndCheckOutput(["zip", zfp, "-y", "-0", "-r", ".", "-i@" + tmpfile.name], cwd=directory)
+  cmd = ["soong_zip", "-o", zfp, "-L", "1", "-d", "-C", directory, "-D", directory]
+  for rel_path in precompressed:
+    cmd.extend(["-s", rel_path])
+  common.RunAndCheckOutput(cmd)
 
 
 def main(argv):

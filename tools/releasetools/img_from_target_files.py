@@ -191,7 +191,7 @@ def RebuildAndWriteSuperImages(input_file, output_file):
   logger.info('Writing super.img to archive...')
   with zipfile.ZipFile(
           output_file, 'a', compression=zipfile.ZIP_DEFLATED,
-          allowZip64=True) as output_zip:
+          compresslevel=1, allowZip64=True) as output_zip:
     common.ZipWrite(output_zip, super_file, 'super.img')
 
 

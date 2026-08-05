@@ -840,6 +840,7 @@ def ReplaceUpdatedFiles(zip_filename, files_list):
   common.ZipDelete(zip_filename, files_list)
   output_zip = zipfile.ZipFile(zip_filename, "a",
                                compression=zipfile.ZIP_DEFLATED,
+                               compresslevel=1,
                                allowZip64=True)
   for item in files_list:
     file_path = os.path.join(OPTIONS.input_tmp, item)
@@ -956,6 +957,7 @@ def AddImagesToTargetFiles(filename):
   else:
     output_zip = zipfile.ZipFile(filename, "a",
                                  compression=zipfile.ZIP_DEFLATED,
+                                 compresslevel=1,
                                  allowZip64=True)
 
   # Always make input_tmp/IMAGES available, since we may stage boot / recovery
