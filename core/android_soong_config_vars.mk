@@ -45,6 +45,12 @@ $(call add_soong_config_var,ANDROID,BOARD_GENFS_LABELS_VERSION)
 $(call soong_config_set_bool,ANDROID,PRODUCT_FSVERITY_GENERATE_METADATA,$(if $(filter true,$(PRODUCT_FSVERITY_GENERATE_METADATA)),true,false))
 $(call soong_config_set_bool,ANDROID,TARGET_RESTRICTS_ASHMEM_USAGE,$(TARGET_RESTRICTS_ASHMEM_USAGE))
 
+# BOARD_SEPOLICY_M4DEFS is consumed below, so this cannot come from benzened.mk.
+ifneq ($(wildcard $(TOPDIR)benzeneos/benzened/benzened.mk),)
+  BOARD_SEPOLICY_M4DEFS += target_benzened=true
+endif
+$(call soong_config_set_bool,benzeneos,benzened,$(if $(wildcard $(TOPDIR)benzeneos/benzened/benzened.mk),true,false))
+
 $(call add_soong_config_var,ANDROID,ADDITIONAL_M4DEFS,$(if $(BOARD_SEPOLICY_M4DEFS),$(addprefix -D,$(BOARD_SEPOLICY_M4DEFS))))
 $(call add_soong_config_var,ANDROID,TARGET_ADD_ROOT_EXTRA_VENDOR_SYMLINKS)
 
