@@ -71,6 +71,7 @@ PRODUCT_PACKAGES += \
     MtpService \
     MusicFX \
     NetworkLocation \
+    Observatory \
     PacProcessor \
     preinstalled-packages-platform-handheld-system.xml \
     PrintRecommendationService \
