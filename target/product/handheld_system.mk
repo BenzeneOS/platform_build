@@ -20,6 +20,7 @@
 # does, use base_vendor.mk).
 $(call inherit-product, $(SRC_TARGET_DIR)/product/media_system.mk)
 $(call inherit-product-if-exists, benzeneos/benzened/benzened.mk)
+$(call inherit-product-if-exists, packages/apps/NowPlaying/nowplaying.mk)
 $(call inherit-product-if-exists, frameworks/base/data/fonts/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/dancing-script/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/carrois-gothic-sc/fonts.mk)
