@@ -34,3 +34,5 @@ PRODUCT_PACKAGES += \
 
 # Allowlist for system packages included in handheld_system_ext.mk
 PRODUCT_PACKAGES += preinstalled-packages-handheld-system-ext.xml
+
+$(call inherit-product-if-exists, packages/services/DroidfoodAttestationFixer/mystic.mk)
